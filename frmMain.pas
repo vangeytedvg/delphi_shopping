@@ -14,7 +14,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, ovcbase, ovcclock, ovccmbx,
   ovcdvcbx, ovctcmmn, ovcdbtbl, DateUtils, DataMod, Vcl.Imaging.pngimage,
-  VclTee.TeeGDIPlus, VclTee.TeEngine, VclTee.Series, VclTee.TeeProcs,
+  VclTee.TeeGDIPlus, VclTee.TeEngine, VclTee.Series, VclTee.TeeProcs, ShellApi,
   VclTee.Chart, VclTee.DBChart;
 
 type
@@ -52,6 +52,8 @@ type
     Label6: TLabel;
     cmbSortBy: TComboBox;
     cbASCDESC: TCheckBox;
+    Statistics1: TMenuItem;
+    GraphbyDate1: TMenuItem;
     procedure ReferenceData2Click(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -65,9 +67,10 @@ type
     procedure mnuToolsGraphClick(Sender: TObject);
     procedure cmbSortByChange(Sender: TObject);
     procedure cbASCDESCClick(Sender: TObject);
+    procedure GraphbyDate1Click(Sender: TObject);
   private
     { Private declarations }
-    origSql : String;
+    origSql: String;
   public
     { Public declarations }
     procedure ShowNoRecords(IsVisible: boolean);
@@ -79,7 +82,7 @@ var
 implementation
 
 uses
-  frmShopEditor, graphView;
+  frmShopEditor, graphView, graphByDate;
 
 {$R *.dfm}
 
@@ -179,7 +182,7 @@ begin
 
   // Execute it
   DataModule1.ExpensesTable.Active := false;
-  DataModule1.ExpensesTable.sql.text := '';
+  DataModule1.ExpensesTable.sql.Text := '';
   DataModule1.ExpensesTable.sql.Text := sql;
   DataModule1.ExpensesTable.Active := true;
 end;
@@ -264,12 +267,18 @@ begin
 
 end;
 
+procedure TForm9.GraphbyDate1Click(Sender: TObject);
+begin
+  frmGraphByDate.Show;
+end;
+
 procedure TForm9.mnuToolsExportClick(Sender: TObject);
 // Export the GRID currently displayed data to a CSV file
 var
   CSVData: TStringList;
   RowData: String;
   ColIndex, RowIndex: Integer;
+  selectedFile: String;
 begin
   if DataMod.DataModule1.ExpensesTable.RecordCount > 0 then
   begin
@@ -299,8 +308,13 @@ begin
       end;
       if SaveDialog1.Execute then
       begin
+        selectedFile := SaveDialog1.FileName;
         CSVData.SaveToFile(SaveDialog1.FileName);
-
+        if MessageDlg('Would you like to view the file?', mtConfirmation,
+          [mbYes, mbNo], 0, mbYes) = mrYes then
+        begin
+         ShellExecute(Handle, 'open', PChar(selectedFile), nil,nil,SW_SHOWNORMAL)
+        end;
       end;
 
     finally

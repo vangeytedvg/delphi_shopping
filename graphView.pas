@@ -14,7 +14,7 @@ type
     MainMenu1: TMainMenu;
     Graph1: TMenuItem;
     mnuPrintGraph: TMenuItem;
-    Series1: TBarSeries;
+    Series1: TPieSeries;
     procedure mnuPrintGraphClick(Sender: TObject);
   private
     { Private declarations }

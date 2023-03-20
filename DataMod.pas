@@ -24,6 +24,8 @@ type
     ExpensesTableAMOUNT: TBCDField;
     ExpensesTableDATEEXPENSE: TWideStringField;
     ExpensesTableSHOPID: TWideStringField;
+    SumbyshopView: TFDQuery;
+    SumbydateView: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -44,6 +46,8 @@ begin
   ShopperConnection.Connected := true;
   ShopsTable.Active := true;
   ExpensesTable.Active := true;
+  SumbyshopView.Active := true;
+  SumbydateView.Active := true;
 end;
 
 end.

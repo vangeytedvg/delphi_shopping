@@ -1,0 +1,12 @@
+inherited frmExpensesByDate: TfrmExpensesByDate
+  Caption = 'frmExpensesByDate'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited chrtExpense: TDBChart
+    PrintMargins = (
+      15
+      28
+      15
+      28)
+  end
+end
