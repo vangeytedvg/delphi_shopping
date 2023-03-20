@@ -1,0 +1,105 @@
+object FormShopEditor: TFormShopEditor
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'Shops Editor'
+  ClientHeight = 291
+  ClientWidth = 595
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 38
+    Height = 13
+    Caption = 'SHOPID'
+    FocusControl = DBEdit1
+  end
+  object Label2: TLabel
+    Left = 80
+    Top = 8
+    Width = 55
+    Height = 13
+    Caption = 'SHOPNAME'
+    FocusControl = DBEdit2
+  end
+  object Label3: TLabel
+    Left = 8
+    Top = 54
+    Width = 52
+    Height = 13
+    Caption = 'LOCATION'
+    FocusControl = DBEdit3
+  end
+  object DBGrid1: TDBGrid
+    Left = 8
+    Top = 100
+    Width = 572
+    Height = 120
+    DataSource = ShopsDataSource
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object DBEdit1: TDBEdit
+    Left = 8
+    Top = 27
+    Width = 56
+    Height = 21
+    DataField = 'SHOPID'
+    DataSource = ShopsDataSource
+    TabOrder = 1
+  end
+  object DBEdit2: TDBEdit
+    Left = 80
+    Top = 27
+    Width = 355
+    Height = 21
+    DataField = 'SHOPNAME'
+    DataSource = ShopsDataSource
+    TabOrder = 2
+  end
+  object DBEdit3: TDBEdit
+    Left = 8
+    Top = 73
+    Width = 427
+    Height = 21
+    DataField = 'LOCATION'
+    DataSource = ShopsDataSource
+    TabOrder = 3
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 8
+    Top = 226
+    Width = 570
+    Height = 25
+    DataSource = ShopsDataSource
+    TabOrder = 4
+  end
+  object btnClose: TButton
+    Left = 505
+    Top = 257
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Close'
+    TabOrder = 5
+    OnClick = btnCloseClick
+  end
+  object ShopsDataSource: TDataSource
+    DataSet = DataModule1.ShopsTable
+    Left = 56
+    Top = 256
+  end
+end

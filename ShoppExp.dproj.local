@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/03/17 13:11:11.000.955,=C:\Users\vange\OneDrive\Documents\Embarcadero\Studio\Projects\Unit9.pas</Transaction>
+    <Transaction>2023/03/17 13:14:00.000.513,=C:\Users\vange\OneDrive\Documents\Embarcadero\Studio\Projects\Unit9.pas</Transaction>
+    <Transaction>2023/03/17 13:14:58.000.231,C:\Users\vange\OneDrive\Documents\Embarcadero\Studio\Projects\Unit9.pas=C:\Development\Delphi\ShoppExpense\frmMain.pas</Transaction>
+    <Transaction>2023/03/17 13:14:58.000.231,C:\Users\vange\OneDrive\Documents\Embarcadero\Studio\Projects\Unit9.dfm=C:\Development\Delphi\ShoppExpense\frmMain.dfm</Transaction>
+    <Transaction>2023/03/17 13:15:03.000.539,C:\Users\vange\OneDrive\Documents\Embarcadero\Studio\Projects\Project9.dproj=C:\Development\Delphi\ShoppExpense\ShoppExp.dproj</Transaction>
+    <Transaction>2023/03/17 13:17:47.000.809,=C:\Development\Delphi\ShoppExpense\Unit1.pas</Transaction>
+    <Transaction>2023/03/17 13:18:17.000.947,C:\Development\Delphi\ShoppExpense\Unit1.dfm=C:\Development\Delphi\ShoppExpense\DataMod.dfm</Transaction>
+    <Transaction>2023/03/17 13:18:17.000.947,C:\Development\Delphi\ShoppExpense\Unit1.pas=C:\Development\Delphi\ShoppExpense\DataMod.pas</Transaction>
+    <Transaction>2023/03/17 13:51:49.000.868,=C:\Development\Delphi\ShoppExpense\Unit1.pas</Transaction>
+    <Transaction>2023/03/17 13:54:16.000.454,C:\Development\Delphi\ShoppExpense\frmShopEditor.dfm=C:\Development\Delphi\ShoppExpense\Unit1.dfm</Transaction>
+    <Transaction>2023/03/17 13:54:16.000.454,C:\Development\Delphi\ShoppExpense\frmShopEditor.pas=C:\Development\Delphi\ShoppExpense\Unit1.pas</Transaction>
+    <Transaction>2023/03/18 14:37:19.000.717,=C:\Development\Delphi\ShoppExpense\Unit1.pas</Transaction>
+    <Transaction>2023/03/18 14:37:38.000.889,C:\Development\Delphi\ShoppExpense\frmExportCSV.dfm=C:\Development\Delphi\ShoppExpense\Unit1.dfm</Transaction>
+    <Transaction>2023/03/18 14:37:38.000.889,C:\Development\Delphi\ShoppExpense\frmExportCSV.pas=C:\Development\Delphi\ShoppExpense\Unit1.pas</Transaction>
+    <Transaction>2023/03/19 12:49:36.000.770,C:\Development\Delphi\ShoppExpense\frmExportCSV.pas=</Transaction>
+    <Transaction>2023/03/20 09:39:45.748,=C:\Development\Delphi\ShoppExpense\Unit1.pas</Transaction>
+    <Transaction>2023/03/20 09:51:15.440,C:\Development\Delphi\ShoppExpense\graphView.dfm=C:\Development\Delphi\ShoppExpense\Unit1.dfm</Transaction>
+    <Transaction>2023/03/20 09:51:15.440,C:\Development\Delphi\ShoppExpense\graphView.pas=C:\Development\Delphi\ShoppExpense\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
