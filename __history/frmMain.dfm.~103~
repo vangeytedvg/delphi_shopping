@@ -6433,8 +6433,9 @@ object Form9: TForm9
       Top = 45
       Width = 127
       Height = 23
-      DataField = 'EXPDATE'
+      DataField = 'DATEEXPENSE'
       DataSource = DataModule1.DS_Expense
+      MaxLength = 10
       TabOrder = 1
     end
     object DBEdit1: TDBEdit

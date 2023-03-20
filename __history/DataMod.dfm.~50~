@@ -1,8 +1,8 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 209
-  Width = 485
+  Height = 216
+  Width = 442
   object ShopperConnection: TFDConnection
     Params.Strings = (
       'ConnectionDef=Shopper')
@@ -69,7 +69,7 @@ object DataModule1: TDataModule1
       DisplayWidth = 20
       FieldName = 'DATEEXPENSE'
       Origin = 'DATEEXPENSE'
-      EditMask = '!99/99/0000;1;_'
+      EditMask = '!99-99-0000;1;_'
       Size = 10
     end
     object ExpensesTableSHOPID: TWideStringField
@@ -83,5 +83,21 @@ object DataModule1: TDataModule1
     DataSet = ExpensesTable
     Left = 224
     Top = 80
+  end
+  object SumbyshopView: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'SELECT * FROM sumbyshop')
+    Left = 339
+    Top = 29
+  end
+  object SumbydateView: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'SELECT * FROM sumbydate')
+    Left = 356
+    Top = 84
   end
 end

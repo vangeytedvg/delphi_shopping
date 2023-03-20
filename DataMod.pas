@@ -22,10 +22,10 @@ type
     DS_Expense: TDataSource;
     ExpensesTableEXPENSE_ID: TFDAutoIncField;
     ExpensesTableAMOUNT: TBCDField;
-    ExpensesTableDATEEXPENSE: TWideStringField;
     ExpensesTableSHOPID: TWideStringField;
     SumbyshopView: TFDQuery;
     SumbydateView: TFDQuery;
+    ExpensesTableEXPDATE: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

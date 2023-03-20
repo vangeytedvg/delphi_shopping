@@ -310,6 +310,8 @@ begin
       begin
         selectedFile := SaveDialog1.FileName;
         CSVData.SaveToFile(SaveDialog1.FileName);
+        // Once exported, check if preview is needed, note that the name of the
+        // file must be cast to a PChar for ShellApi
         if MessageDlg('Would you like to view the file?', mtConfirmation,
           [mbYes, mbNo], 0, mbYes) = mrYes then
         begin

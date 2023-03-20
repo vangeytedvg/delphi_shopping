@@ -28,20 +28,13 @@ object frmGraphByDate: TfrmGraphByDate
     TabOrder = 0
     DefaultCanvas = 'TGDIPlusCanvas'
     ColorPaletteIndex = 13
-    object Series1: TLineSeries
-      ColorEachPoint = True
-      Marks.Visible = True
-      Marks.Callout.Length = 20
+    object Series1: TBarSeries
       DataSource = DataModule1.SumbydateView
-      XLabelsSource = 'AMOUNT'
-      ClickableLine = False
-      LinePen.Color = 10708548
-      Pointer.InflateMargins = True
-      Pointer.Style = psRectangle
+      XLabelsSource = 'EXPDATE'
       XValues.Name = 'X'
       XValues.Order = loAscending
-      XValues.ValueSource = 'EXPDATE'
-      YValues.Name = 'Y'
+      XValues.ValueSource = 'AMOUNT'
+      YValues.Name = 'Bar'
       YValues.Order = loNone
       YValues.ValueSource = 'AMOUNT'
     end

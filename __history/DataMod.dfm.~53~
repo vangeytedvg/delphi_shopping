@@ -1,8 +1,8 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 209
-  Width = 485
+  Height = 216
+  Width = 442
   object ShopperConnection: TFDConnection
     Params.Strings = (
       'ConnectionDef=Shopper')
@@ -65,18 +65,15 @@ object DataModule1: TDataModule1
       Precision = 5
       Size = 2
     end
-    object ExpensesTableDATEEXPENSE: TWideStringField
-      DisplayWidth = 20
-      FieldName = 'DATEEXPENSE'
-      Origin = 'DATEEXPENSE'
-      EditMask = '!99/99/0000;1;_'
-      Size = 10
-    end
     object ExpensesTableSHOPID: TWideStringField
       DisplayWidth = 6
       FieldName = 'SHOPID'
       Origin = 'SHOPID'
       Size = 5
+    end
+    object ExpensesTableEXPDATE: TIntegerField
+      FieldName = 'EXPDATE'
+      Origin = 'EXPDATE'
     end
   end
   object DS_Expense: TDataSource
@@ -84,33 +81,19 @@ object DataModule1: TDataModule1
     Left = 224
     Top = 80
   end
-  object Expenses: TFDTable
+  object SumbyshopView: TFDQuery
     Active = True
-    IndexFieldNames = 'EXPENSE_ID'
     Connection = ShopperConnection
-    TableName = 'expenses'
-    Left = 368
-    Top = 72
-    object ExpensesEXPENSE_ID: TFDAutoIncField
-      FieldName = 'EXPENSE_ID'
-      Origin = 'EXPENSE_ID'
-      ProviderFlags = [pfInWhere, pfInKey]
-    end
-    object ExpensesAMOUNT: TBCDField
-      FieldName = 'AMOUNT'
-      Origin = 'AMOUNT'
-      Precision = 5
-      Size = 2
-    end
-    object ExpensesDATEEXPENSE: TWideStringField
-      FieldName = 'DATEEXPENSE'
-      Origin = 'DATEEXPENSE'
-      Size = 10
-    end
-    object ExpensesSHOPID: TWideStringField
-      FieldName = 'SHOPID'
-      Origin = 'SHOPID'
-      Size = 5
-    end
+    SQL.Strings = (
+      'SELECT * FROM sumbyshop')
+    Left = 339
+    Top = 29
+  end
+  object SumbydateView: TFDQuery
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'SELECT * FROM sumbydate')
+    Left = 356
+    Top = 84
   end
 end

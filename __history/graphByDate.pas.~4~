@@ -11,10 +11,10 @@ uses
 type
   TfrmGraphByDate = class(TForm)
     chrtExpense: TDBChart;
+    Series1: TBarSeries;
     MainMenu1: TMainMenu;
     Graph1: TMenuItem;
     mnuGraphPrint: TMenuItem;
-    Series1: TLineSeries;
     procedure mnuGraphPrintClick(Sender: TObject);
   private
     { Private declarations }

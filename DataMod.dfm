@@ -65,18 +65,15 @@ object DataModule1: TDataModule1
       Precision = 5
       Size = 2
     end
-    object ExpensesTableDATEEXPENSE: TWideStringField
-      DisplayWidth = 20
-      FieldName = 'DATEEXPENSE'
-      Origin = 'DATEEXPENSE'
-      EditMask = '!99-99-0000;1;_'
-      Size = 10
-    end
     object ExpensesTableSHOPID: TWideStringField
       DisplayWidth = 6
       FieldName = 'SHOPID'
       Origin = 'SHOPID'
       Size = 5
+    end
+    object ExpensesTableEXPDATE: TIntegerField
+      FieldName = 'EXPDATE'
+      Origin = 'EXPDATE'
     end
   end
   object DS_Expense: TDataSource
