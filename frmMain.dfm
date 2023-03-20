@@ -800,9 +800,9 @@ object Form9: TForm9
   end
   object DBGrid1: TDBGrid
     Left = 8
-    Top = 199
+    Top = 232
     Width = 813
-    Height = 429
+    Height = 396
     DataSource = DataModule1.DS_Expense
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -840,9 +840,9 @@ object Form9: TForm9
   object GroupBox1: TGroupBox
     Left = 248
     Top = 8
-    Width = 553
-    Height = 97
-    Caption = 'Filters'
+    Width = 573
+    Height = 121
+    Caption = 'Filters / Sorting'
     TabOrder = 3
     object Label4: TLabel
       Left = 15
@@ -852,21 +852,28 @@ object Form9: TForm9
       Caption = 'Month'
     end
     object Label5: TLabel
-      Left = 143
+      Left = 151
       Top = 27
       Width = 22
       Height = 15
       Caption = 'Year'
     end
     object Label3: TLabel
-      Left = 14
-      Top = 53
+      Left = 15
+      Top = 56
       Width = 27
       Height = 15
       Caption = 'Shop'
     end
+    object Label6: TLabel
+      Left = 15
+      Top = 85
+      Width = 40
+      Height = 15
+      Caption = 'Sort by '
+    end
     object cmbMonth: TComboBox
-      Left = 56
+      Left = 75
       Top = 24
       Width = 70
       Height = 23
@@ -874,7 +881,7 @@ object Form9: TForm9
       TabOrder = 0
     end
     object cmbYear: TComboBox
-      Left = 183
+      Left = 191
       Top = 24
       Width = 145
       Height = 23
@@ -900,23 +907,41 @@ object Form9: TForm9
       OnClick = btnClearFilterClick
     end
     object cmbShopFilter: TComboBox
-      Left = 56
+      Left = 75
       Top = 53
       Width = 145
       Height = 23
       Style = csDropDownList
       TabOrder = 4
     end
+    object cmbSortBy: TComboBox
+      Left = 75
+      Top = 82
+      Width = 145
+      Height = 23
+      Style = csDropDownList
+      TabOrder = 5
+      OnChange = cmbSortByChange
+    end
+    object cbASCDESC: TCheckBox
+      Left = 234
+      Top = 85
+      Width = 97
+      Height = 17
+      Caption = 'Ascending'
+      TabOrder = 6
+      OnClick = cbASCDESCClick
+    end
   end
   object GroupBox2: TGroupBox
     Left = 239
-    Top = 111
-    Width = 553
+    Top = 145
+    Width = 582
     Height = 81
     Caption = 'Expense detail'
     TabOrder = 4
     DesignSize = (
-      553
+      582
       81)
     object lblLocation: TLabel
       Left = 294
@@ -934,13 +959,14 @@ object Form9: TForm9
       FocusControl = DBEdit2
     end
     object Label1: TLabel
-      Left = 28
+      Left = 32
       Top = 24
       Width = 88
       Height = 15
       Anchors = []
       Caption = 'Expense amount'
       FocusControl = DBEdit1
+      ExplicitLeft = 28
     end
     object DBLookupComboBox1: TDBLookupComboBox
       Left = 294
@@ -965,7 +991,7 @@ object Form9: TForm9
       TabOrder = 1
     end
     object DBEdit1: TDBEdit
-      Left = 30
+      Left = 34
       Top = 45
       Width = 86
       Height = 23
@@ -973,6 +999,7 @@ object Form9: TForm9
       DataField = 'AMOUNT'
       DataSource = DataModule1.DS_Expense
       TabOrder = 2
+      ExplicitLeft = 30
     end
   end
   object pnlNoRecs: TPanel

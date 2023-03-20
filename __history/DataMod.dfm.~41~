@@ -1,8 +1,8 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 351
-  Width = 472
+  Height = 209
+  Width = 485
   object ShopperConnection: TFDConnection
     Params.Strings = (
       'ConnectionDef=Shopper')
@@ -44,7 +44,6 @@ object DataModule1: TDataModule1
   end
   object ExpensesTable: TFDQuery
     Active = True
-    AfterGetRecords = ExpensesTableAfterGetRecords
     Connection = ShopperConnection
     SQL.Strings = (
       'select * from expenses')
@@ -84,5 +83,11 @@ object DataModule1: TDataModule1
     DataSet = ExpensesTable
     Left = 224
     Top = 80
+  end
+  object FDTable1: TFDTable
+    Connection = ShopperConnection
+    TableName = 'expenses'
+    Left = 368
+    Top = 72
   end
 end

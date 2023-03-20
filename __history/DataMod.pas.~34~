@@ -24,8 +24,8 @@ type
     ExpensesTableAMOUNT: TBCDField;
     ExpensesTableDATEEXPENSE: TWideStringField;
     ExpensesTableSHOPID: TWideStringField;
+    FDTable1: TFDTable;
     procedure DataModuleCreate(Sender: TObject);
-    procedure ExpensesTableAfterGetRecords(DataSet: TFDDataSet);
   private
     { Private declarations }
   public
@@ -37,8 +37,6 @@ var
 
 implementation
 
-uses frmMain;
-
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 {$R *.dfm}
 
@@ -47,16 +45,6 @@ begin
   ShopperConnection.Connected := true;
   ShopsTable.Active := true;
   ExpensesTable.Active := true;
-end;
-
-
-
-
-
-procedure TDataModule1.ExpensesTableAfterGetRecords(DataSet: TFDDataSet);
-begin
-  if DataSet.RecordCount = 0 then
-    showMessage("");
 end;
 
 end.

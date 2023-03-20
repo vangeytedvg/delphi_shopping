@@ -14,8 +14,8 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, ovcbase, ovcclock, ovccmbx,
   ovcdvcbx, ovctcmmn, ovcdbtbl, DateUtils, DataMod, Vcl.Imaging.pngimage,
-  VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs,
-  VCLTee.Chart, VCLTee.DBChart;
+  VclTee.TeeGDIPlus, VclTee.TeEngine, VclTee.Series, VclTee.TeeProcs,
+  VclTee.Chart, VclTee.DBChart;
 
 type
   TForm9 = class(TForm)
@@ -49,6 +49,9 @@ type
     Label3: TLabel;
     cmbShopFilter: TComboBox;
     mnuToolsGraph: TMenuItem;
+    Label6: TLabel;
+    cmbSortBy: TComboBox;
+    cbASCDESC: TCheckBox;
     procedure ReferenceData2Click(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -60,8 +63,11 @@ type
     procedure btnClearFilterClick(Sender: TObject);
     procedure mnuToolsExportClick(Sender: TObject);
     procedure mnuToolsGraphClick(Sender: TObject);
+    procedure cmbSortByChange(Sender: TObject);
+    procedure cbASCDESCClick(Sender: TObject);
   private
     { Private declarations }
+    origSql : String;
   public
     { Public declarations }
     procedure ShowNoRecords(IsVisible: boolean);
@@ -91,15 +97,15 @@ begin
   end;
   if cmbYear.itemIndex <> -1 then
   begin
-    sqlString := sqlString + ' substr(dateexpense, 7,4) ="' +
-      cmbYear.Text + '" AND';
+    sqlString := sqlString + ' substr(dateexpense, 7,4) ="' + cmbYear.Text
+      + '" AND';
   end;
 
-  if cmbShopFilter.ItemIndex <> -1 then
+  if cmbShopFilter.itemIndex <> -1 then
   begin
-    sqlString := sqlString + ' SHOPID = ' + QuotedStr(cmbShopFilter.Text) + ' AND'
+    sqlString := sqlString + ' SHOPID = ' +
+      QuotedStr(cmbShopFilter.Text) + ' AND'
   end;
-
 
   if String.EndsText('WHERE', sqlString) then
   begin
@@ -138,6 +144,36 @@ begin
     ShowNoRecords(true)
   else
     ShowNoRecords(false);
+end;
+
+procedure TForm9.cbASCDESCClick(Sender: TObject);
+begin
+  if cbASCDESC.Checked then
+    cbASCDESC.Caption := 'Descending'
+  else
+    cbASCDESC.Caption := 'Ascending';
+end;
+
+procedure TForm9.cmbSortByChange(Sender: TObject);
+var
+  sql: String;
+begin
+  // Change the sort order
+  if origSql = '' then
+  begin
+    origSql := DataModule1.ExpensesTable.sql.Text;
+    sql := origSql;
+  end
+  else
+    sql := origSql;
+
+  sql := sql + ' ORDER BY ' + cmbSortBy.Text;
+
+  DataModule1.ExpensesTable.Active := false;
+  DataModule1.ExpensesTable.sql.text := '';
+  showmessage(sql);
+  DataModule1.ExpensesTable.sql.Text := sql;
+  DataModule1.ExpensesTable.Active := true;
 end;
 
 procedure TForm9.DBGrid1ColExit(Sender: TObject);
@@ -201,13 +237,17 @@ begin
   for I := startYear to DateUtils.YearOf(now) do
     cmbYear.items.Add(I.ToString);
 
+  // Fill the sort by combo
+  DataModule1.ExpensesTable.GetFieldNames(cmbSortBy.items);
+
   // Fill the Shops filter combo
   try
-    DataMod.DataModule1.ShopsTable.First;
-    while not DataMod.DataModule1.ShopsTable.eof do
+    DataModule1.ShopsTable.First;
+    while not DataModule1.ShopsTable.eof do
     begin
-      cmbShopFilter.items.Add(DataMod.DataModule1.ShopsTable.FieldByName('SHOPID').AsString);
-      DataMod.DataModule1.ShopsTable.Next;
+      cmbShopFilter.items.Add(DataModule1.ShopsTable.FieldByName('SHOPID')
+        .AsString);
+      DataModule1.ShopsTable.Next;
     end;
 
   finally
@@ -228,28 +268,32 @@ begin
     CSVData := TStringList.Create;
     try
       // First get the headers of the CSV file
-      for ColIndex := 0 to DBGrid1.Columns.Count-1 do
+      for ColIndex := 0 to DBGrid1.Columns.Count - 1 do
       begin
         if ColIndex > 0 then
           RowData := RowData + ',';
-         RowData := RowData + DBGrid1.Columns[ColIndex].Title.Caption;
+        RowData := RowData + DBGrid1.Columns[ColIndex].Title.Caption;
       end;
       CSVData.Add(RowData);
       // Now get the actual data
-      for RowIndex := 0 to DBGrid1.DataSource.DataSet.RecordCount -1 do
+      for RowIndex := 0 to DBGrid1.DataSource.DataSet.RecordCount - 1 do
       begin
         DBGrid1.DataSource.DataSet.RecNo := RowIndex + 1;
         RowData := '';
-        for ColIndex := 0 to DBGrid1.Columns.Count -1 do
+        for ColIndex := 0 to DBGrid1.Columns.Count - 1 do
         begin
-          if ColIndex > 0  then
+          if ColIndex > 0 then
             RowData := RowData + ',';
-          RowData := RowData + '"' + DBGrid1.Columns[ColIndex].Field.AsString +'"';
+          RowData := RowData + '"' + DBGrid1.Columns[ColIndex]
+            .Field.AsString + '"';
         end;
         CSVData.Add(RowData);
       end;
       if SaveDialog1.Execute then
+      begin
         CSVData.SaveToFile(SaveDialog1.FileName);
+
+      end;
 
     finally
       CSVData.Free;

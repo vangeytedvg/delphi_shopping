@@ -1,9 +1,11 @@
 object Form9: TForm9
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsDialog
   Caption = 'Shopping Expense Tracker'
-  ClientHeight = 653
-  ClientWidth = 816
+  ClientHeight = 663
+  ClientWidth = 829
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -797,10 +799,10 @@ object Form9: TForm9
     Proportional = True
   end
   object DBGrid1: TDBGrid
-    Left = 248
-    Top = 198
-    Width = 553
-    Height = 403
+    Left = 8
+    Top = 199
+    Width = 813
+    Height = 429
     DataSource = DataModule1.DS_Expense
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -813,12 +815,14 @@ object Form9: TForm9
     OnKeyPress = DBGrid1KeyPress
   end
   object DBNavExpenses: TDBNavigator
-    Left = 263
-    Top = 607
-    Width = 520
+    Left = 0
+    Top = 638
+    Width = 829
     Height = 25
     DataSource = DataModule1.DS_Expense
+    Align = alBottom
     TabOrder = 1
+    ExplicitWidth = 826
   end
   object DBLookupShopsGRID: TDBLookupComboBox
     Left = 39
@@ -982,8 +986,8 @@ object Form9: TForm9
     Visible = False
   end
   object MainMenu1: TMainMenu
-    Left = 55
-    Top = 240
+    Left = 39
+    Top = 416
     object File1: TMenuItem
       Caption = '&File'
       object File2: TMenuItem
@@ -1000,6 +1004,10 @@ object Form9: TForm9
     end
     object mnuTools: TMenuItem
       Caption = '&Tools'
+      object mnuToolsGraph: TMenuItem
+        Caption = 'Ex&pense Graph'
+        OnClick = mnuToolsGraphClick
+      end
       object mnuToolsExport: TMenuItem
         Caption = '&Export Expenses to CSV'
         OnClick = mnuToolsExportClick
@@ -1007,6 +1015,8 @@ object Form9: TForm9
     end
   end
   object SaveDialog1: TSaveDialog
+    DefaultExt = 'csv'
+    Filter = 'Calc files (*.csv)|*.csv'
     Left = 40
     Top = 360
   end

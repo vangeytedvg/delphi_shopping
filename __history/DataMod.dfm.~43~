@@ -1,8 +1,8 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 351
-  Width = 472
+  Height = 209
+  Width = 485
   object ShopperConnection: TFDConnection
     Params.Strings = (
       'ConnectionDef=Shopper')
@@ -83,5 +83,34 @@ object DataModule1: TDataModule1
     DataSet = ExpensesTable
     Left = 224
     Top = 80
+  end
+  object Expenses: TFDTable
+    Active = True
+    IndexFieldNames = 'EXPENSE_ID'
+    Connection = ShopperConnection
+    TableName = 'expenses'
+    Left = 368
+    Top = 72
+    object ExpensesEXPENSE_ID: TFDAutoIncField
+      FieldName = 'EXPENSE_ID'
+      Origin = 'EXPENSE_ID'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object ExpensesAMOUNT: TBCDField
+      FieldName = 'AMOUNT'
+      Origin = 'AMOUNT'
+      Precision = 5
+      Size = 2
+    end
+    object ExpensesDATEEXPENSE: TWideStringField
+      FieldName = 'DATEEXPENSE'
+      Origin = 'DATEEXPENSE'
+      Size = 10
+    end
+    object ExpensesSHOPID: TWideStringField
+      FieldName = 'SHOPID'
+      Origin = 'SHOPID'
+      Size = 5
+    end
   end
 end

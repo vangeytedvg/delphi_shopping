@@ -2,7 +2,7 @@ object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 209
-  Width = 485
+  Width = 351
   object ShopperConnection: TFDConnection
     Params.Strings = (
       'ConnectionDef=Shopper')
