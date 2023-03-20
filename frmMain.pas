@@ -139,6 +139,7 @@ begin
   DataMod.DataModule1.ExpensesTable.sql.Clear;
   DataMod.DataModule1.ExpensesTable.sql.Add('SELECT * FROM expenses');
   DataMod.DataModule1.ExpensesTable.Active := true;
+  origSql := 'SELECT * FROM expenses';
   if DataMod.DataModule1.ExpensesTable.RowsAffected = 0 then
     // Show the panel on the main form
     ShowNoRecords(true)
@@ -161,6 +162,7 @@ begin
   // Change the sort order
   if origSql = '' then
   begin
+    // Remember the original sort order
     origSql := DataModule1.ExpensesTable.sql.Text;
     sql := origSql;
   end
@@ -169,9 +171,15 @@ begin
 
   sql := sql + ' ORDER BY ' + cmbSortBy.Text;
 
+  // Check the sort order
+  if cbASCDESC.Checked then
+    sql := sql + ' DESC'
+  else
+    sql := sql + ' ASC';
+
+  // Execute it
   DataModule1.ExpensesTable.Active := false;
   DataModule1.ExpensesTable.sql.text := '';
-  showmessage(sql);
   DataModule1.ExpensesTable.sql.Text := sql;
   DataModule1.ExpensesTable.Active := true;
 end;
