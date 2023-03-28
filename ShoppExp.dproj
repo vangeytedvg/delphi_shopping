@@ -125,6 +125,14 @@
             <Form>frmGraphByDate</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="grapAvg.pas">
+            <Form>FormAVG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="graphPeriods.pas">
+            <Form>FormPeriods</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

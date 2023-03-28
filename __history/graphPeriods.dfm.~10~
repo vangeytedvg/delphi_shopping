@@ -1,0 +1,51 @@
+object FormPeriods: TFormPeriods
+  Left = 0
+  Top = 0
+  Caption = 'FormPeriods'
+  ClientHeight = 592
+  ClientWidth = 738
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 0
+    Width = 738
+    Height = 592
+    Align = alClient
+    DataSource = DataModule1.DS_Periods
+    ReadOnly = True
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object MainMenu1: TMainMenu
+    Left = 40
+    Top = 152
+    object Graph1: TMenuItem
+      Caption = '&Table'
+      object Graph2: TMenuItem
+        Caption = '&Refresh'
+        OnClick = Graph2Click
+      end
+      object Print1: TMenuItem
+        Caption = '&Print'
+        OnClick = Print1Click
+      end
+      object Exit1: TMenuItem
+        Caption = 'E&xit'
+        OnClick = Exit1Click
+      end
+    end
+  end
+end

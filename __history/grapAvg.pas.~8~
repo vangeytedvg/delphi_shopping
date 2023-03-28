@@ -1,0 +1,31 @@
+unit grapAvg;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VclTee.TeeGDIPlus, Data.DB,
+  VCLTee.TeEngine, VCLTee.Series, Vcl.ExtCtrls, VCLTee.TeeProcs, VCLTee.Chart,
+  VCLTee.DBChart, Vcl.ComCtrls, Vcl.StdCtrls;
+
+type
+  TFormAVG = class(TForm)
+    chrtExpense: TDBChart;
+    Series1: TLineSeries;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormAVG: TFormAVG;
+
+implementation
+
+uses
+  DataMod;
+
+{$R *.dfm}
+
+end.

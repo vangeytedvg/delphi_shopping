@@ -26,7 +26,13 @@ type
     SumbyshopView: TFDQuery;
     SumbydateView: TFDQuery;
     ExpensesTableEXPDATE: TIntegerField;
+    SumdatesView: TFDQuery;
+    FDQuery1: TFDQuery;
+    AVGByShop: TFDQuery;
+    PeriodQuery: TFDQuery;
+    DS_Periods: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,6 +54,19 @@ begin
   ExpensesTable.Active := true;
   SumbyshopView.Active := true;
   SumbydateView.Active := true;
+  PeriodQuery.Active := true;
+  AVGByShop.Active := true;
+end;
+
+procedure TDataModule1.DataModuleDestroy(Sender: TObject);
+begin
+  ShopperConnection.Connected := false;
+  ShopsTable.Active := false;
+  ExpensesTable.Active := false;
+  SumbyshopView.Active := false;
+  SumbydateView.Active := false;
+  PeriodQuery.Active := false;
+  AVGByShop.Active := false;
 end;
 
 end.

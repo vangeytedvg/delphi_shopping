@@ -20,7 +20,7 @@ object frmGraphByDate: TfrmGraphByDate
     Width = 695
     Height = 520
     Title.Text.Strings = (
-      'TDBChart')
+      'Expenses')
     Chart3DPercent = 43
     Legend.Visible = False
     View3DOptions.Zoom = 83
@@ -28,22 +28,18 @@ object frmGraphByDate: TfrmGraphByDate
     TabOrder = 0
     DefaultCanvas = 'TGDIPlusCanvas'
     ColorPaletteIndex = 13
-    object Series1: TLineSeries
+    object Series1: TBarSeries
+      BarBrush.BackColor = clDefault
+      BarPen.Color = 10708548
       ColorEachPoint = True
-      Marks.Visible = True
-      Marks.Callout.Length = 20
-      DataSource = DataModule1.SumbydateView
-      XLabelsSource = 'AMOUNT'
-      ClickableLine = False
-      LinePen.Color = 10708548
-      Pointer.InflateMargins = True
-      Pointer.Style = psRectangle
+      DataSource = DataModule1.FDQuery1
+      XLabelsSource = 'ed'
       XValues.Name = 'X'
       XValues.Order = loAscending
-      XValues.ValueSource = 'EXPDATE'
-      YValues.Name = 'Y'
+      XValues.ValueSource = 'EXPENSE_ID'
+      YValues.Name = 'Bar'
       YValues.Order = loNone
-      YValues.ValueSource = 'AMOUNT'
+      YValues.ValueSource = 'sum(AMOUNT)'
     end
   end
   object MainMenu1: TMainMenu
@@ -51,9 +47,17 @@ object frmGraphByDate: TfrmGraphByDate
     Top = 32
     object Graph1: TMenuItem
       Caption = 'Graph'
+      object Refresh1: TMenuItem
+        Caption = '&Refresh'
+        OnClick = Refresh1Click
+      end
       object mnuGraphPrint: TMenuItem
         Caption = '&Print'
         OnClick = mnuGraphPrintClick
+      end
+      object Exit1: TMenuItem
+        Caption = 'E&xit'
+        OnClick = Exit1Click
       end
     end
   end

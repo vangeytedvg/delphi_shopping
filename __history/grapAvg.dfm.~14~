@@ -1,0 +1,130 @@
+object FormAVG: TFormAVG
+  Left = 0
+  Top = 0
+  Caption = 'FormAVG'
+  ClientHeight = 447
+  ClientWidth = 720
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object chrtExpense: TDBChart
+    Left = 0
+    Top = 0
+    Width = 720
+    Height = 404
+    Foot.Color = 9917212
+    Foot.Font.Color = clBlack
+    Foot.Font.Height = -9
+    Foot.Text.Strings = (
+      'by DenkaTech')
+    LeftWall.Visible = False
+    ScrollMouseButton = mbMiddle
+    Title.Font.Height = -21
+    Title.Text.Strings = (
+      'Average Expenses by Shop')
+    Chart3DPercent = 1
+    LeftAxis.Ticks.Width = 0
+    Panning.InsideBounds = True
+    View3DOptions.Elevation = 315
+    View3DOptions.HorizOffset = -14
+    View3DOptions.Orthogonal = False
+    View3DOptions.Perspective = 0
+    View3DOptions.Rotation = 360
+    Zoom.Animated = True
+    Align = alClient
+    TabOrder = 0
+    ExplicitHeight = 424
+    DefaultCanvas = 'TGDIPlusCanvas'
+    PrintMargins = (
+      15
+      16
+      15
+      16)
+    ColorPaletteIndex = 15
+    object Series1: TPieSeries
+      Marks.Transparent = True
+      Marks.Angle = 17
+      Marks.Callout.ArrowHead = ahSolid
+      Marks.Callout.Distance = 25
+      DataSource = DataModule1.AVGByShop
+      SeriesColor = 16776176
+      XLabelsSource = 'SHOPNAME'
+      XValues.Order = loAscending
+      YValues.Name = 'Pie'
+      YValues.Order = loNone
+      YValues.ValueSource = 'round(avg(amount),2)'
+      Frame.InnerBrush.BackColor = clRed
+      Frame.InnerBrush.Gradient.EndColor = clGray
+      Frame.InnerBrush.Gradient.MidColor = clWhite
+      Frame.InnerBrush.Gradient.StartColor = 4210752
+      Frame.InnerBrush.Gradient.Visible = True
+      Frame.MiddleBrush.BackColor = clYellow
+      Frame.MiddleBrush.Gradient.EndColor = 8553090
+      Frame.MiddleBrush.Gradient.MidColor = clWhite
+      Frame.MiddleBrush.Gradient.StartColor = clGray
+      Frame.MiddleBrush.Gradient.Visible = True
+      Frame.OuterBrush.BackColor = clGreen
+      Frame.OuterBrush.Gradient.EndColor = 4210752
+      Frame.OuterBrush.Gradient.MidColor = clWhite
+      Frame.OuterBrush.Gradient.StartColor = clSilver
+      Frame.OuterBrush.Gradient.Visible = True
+      Frame.Width = 4
+      Emboss.Visible = True
+      ExplodeBiggest = 25
+      OtherSlice.Legend.Visible = False
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 404
+    Width = 720
+    Height = 43
+    Align = alBottom
+    TabOrder = 1
+    ExplicitTop = 424
+    object Label1: TLabel
+      Left = 1
+      Top = 1
+      Width = 718
+      Height = 13
+      Align = alTop
+      Caption = 'Rotation'
+      ExplicitWidth = 41
+    end
+    object TrackBarRotation: TTrackBar
+      Left = 1
+      Top = 14
+      Width = 718
+      Height = 28
+      Align = alClient
+      Max = 360
+      TabOrder = 0
+      TickMarks = tmTopLeft
+      OnChange = TrackBarRotationChange
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 48
+    Top = 32
+    object Graph1: TMenuItem
+      Caption = '&Graph'
+      object Graph2: TMenuItem
+        Caption = '&Print'
+        OnClick = Graph2Click
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object Exit1: TMenuItem
+        Caption = 'E&xit'
+      end
+    end
+  end
+end

@@ -1,8 +1,9 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   Height = 216
-  Width = 442
+  Width = 640
   object ShopperConnection: TFDConnection
     Params.Strings = (
       'ConnectionDef=Shopper')
@@ -74,6 +75,7 @@ object DataModule1: TDataModule1
     object ExpensesTableEXPDATE: TIntegerField
       FieldName = 'EXPDATE'
       Origin = 'EXPDATE'
+      EditFormat = '########'
     end
   end
   object DS_Expense: TDataSource
@@ -85,16 +87,72 @@ object DataModule1: TDataModule1
     Active = True
     Connection = ShopperConnection
     SQL.Strings = (
-      'SELECT * FROM sumbyshop')
-    Left = 339
-    Top = 29
+      'SELECT sum(AMOUNT), shops.SHOPNAME  '
+      'FROM expenses'
+      'INNER JOIN shops ON shops.SHOPID  = expenses.SHOPID'
+      'group by expenses.SHOPID ')
+    Left = 451
+    Top = 37
   end
   object SumbydateView: TFDQuery
     Active = True
     Connection = ShopperConnection
     SQL.Strings = (
       'SELECT * FROM sumbydate')
-    Left = 356
-    Top = 84
+    Left = 364
+    Top = 36
+  end
+  object SumdatesView: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'SELECT * FROM sumDates')
+    Left = 550
+    Top = 38
+  end
+  object FDQuery1: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      
+        'SELECT cast(expenses.EXPDATE  as text) as ed, EXPENSE_ID, sum(AM' +
+        'OUNT) , SHOPID , EXPDATE  from expenses '
+      'group by EXPDATE  '
+      'ORDER BY ed ASC')
+    Left = 40
+    Top = 88
+  end
+  object AVGByShop: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'select round(avg(amount),2),'
+      'shops.SHOPNAME  '
+      'FROM expenses'
+      'INNER JOIN shops ON shops.SHOPID  = expenses.SHOPID'
+      'group by expenses.SHOPID '
+      '')
+    Left = 360
+    Top = 88
+  end
+  object PeriodQuery: TFDQuery
+    Connection = ShopperConnection
+    SQL.Strings = (
+      
+        'select shops.SHOPNAME as Location, sum(amount) as Amt, SUBSTRING' +
+        '(cast(expdate as string), 5,2) || substring(cast(expdate as stri' +
+        'ng), 1, 4) as Period '
+      'from expenses INNER JOIN shops ON shops.SHOPID = expenses.SHOPID'
+      
+        'group by SUBSTRING(cast(expdate as string), 5,2), expenses.shopi' +
+        'd '
+      'order by Period')
+    Left = 144
+    Top = 144
+  end
+  object DS_Periods: TDataSource
+    DataSet = PeriodQuery
+    Left = 224
+    Top = 144
   end
 end

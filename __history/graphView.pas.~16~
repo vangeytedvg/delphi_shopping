@@ -1,0 +1,53 @@
+unit graphView;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VclTee.TeeGDIPlus, Data.DB,
+  VclTee.TeEngine, VclTee.Series, Vcl.ExtCtrls, VclTee.TeeProcs, VclTee.Chart,
+  VclTee.DBChart, Vcl.Menus, Vcl.StdCtrls, ovcbase, ovcslide;
+
+type
+  TfrmExpenseGraph = class(TForm)
+    MainMenu1: TMainMenu;
+    Graph1: TMenuItem;
+    mnuPrintGraph: TMenuItem;
+    chrtExpense: TDBChart;
+    Series1: TPieSeries;
+    mnuFileExit: TMenuItem;
+    Panel1: TPanel;
+    Label1: TLabel;
+    OvcSlider1: TOvcSlider;
+    procedure mnuPrintGraphClick(Sender: TObject);
+    procedure mnuFileExitClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmExpenseGraph: TfrmExpenseGraph;
+
+implementation
+
+uses
+  DataMod;
+
+{$R *.dfm}
+
+
+
+procedure TfrmExpenseGraph.mnuFileExitClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmExpenseGraph.mnuPrintGraphClick(Sender: TObject);
+begin
+  chrtExpense.Print;
+end;
+
+end.

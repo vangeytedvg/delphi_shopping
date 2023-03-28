@@ -8,7 +8,7 @@ object frmExpenseGraph: TfrmExpenseGraph
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
@@ -18,45 +18,40 @@ object frmExpenseGraph: TfrmExpenseGraph
     Left = 0
     Top = 0
     Width = 738
-    Height = 563
+    Height = 520
+    Foot.Color = 9917212
+    Foot.Font.Color = clBlack
+    Foot.Font.Height = -9
     Foot.Text.Strings = (
-      'DenkaTech Expenses')
-    ScrollMouseButton = mbLeft
+      'by DenkaTech')
+    ScrollMouseButton = mbMiddle
+    Title.Font.Height = -21
     Title.Text.Strings = (
-      'Shopping Expenses by Shop')
-    Chart3DPercent = 78
-    Legend.FontSeriesColor = True
-    Panning.MouseWheel = pmwNone
+      'Expenses by Shop')
+    Chart3DPercent = 11
+    ClipPoints = False
+    Panning.InsideBounds = True
     View3DOptions.Elevation = 315
-    View3DOptions.HorizOffset = 14
     View3DOptions.Orthogonal = False
     View3DOptions.Perspective = 0
     View3DOptions.Rotation = 360
-    View3DOptions.VertOffset = 14
-    View3DOptions.Zoom = 93
-    Zoom.MouseButton = mbMiddle
-    ZoomWheel = pmwNormal
     Align = alClient
     TabOrder = 0
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
-      28
+      16
       15
-      28)
-    ColorPaletteIndex = 21
+      16)
+    ColorPaletteIndex = 15
     object Series1: TPieSeries
-      Legend.Text = 'Shops'
-      LegendTitle = 'Shops'
-      Marks.Frame.Visible = False
-      Marks.Callout.Length = 20
       DataSource = DataModule1.SumbyshopView
-      XLabelsSource = 'SHOPID'
+      SeriesColor = 16776176
+      XLabelsSource = 'SHOPNAME'
       XValues.Order = loAscending
-      XValues.ValueSource = 'sum(amount)'
       YValues.Name = 'Pie'
       YValues.Order = loNone
-      YValues.ValueSource = 'sum(amount)'
+      YValues.ValueSource = 'sum(AMOUNT)'
       Frame.InnerBrush.BackColor = clRed
       Frame.InnerBrush.Gradient.EndColor = clGray
       Frame.InnerBrush.Gradient.MidColor = clWhite
@@ -73,9 +68,44 @@ object frmExpenseGraph: TfrmExpenseGraph
       Frame.OuterBrush.Gradient.StartColor = clSilver
       Frame.OuterBrush.Gradient.Visible = True
       Frame.Width = 4
+      Bevel.Bright = 58
+      Bevel.Percent = 35
+      BevelPercent = 35
+      Dark3D = False
+      DarkPen = 220
+      EdgeStyle = edCurved
+      ExplodeBiggest = 25
       OtherSlice.Legend.Visible = False
-      PiePen.Color = 7028779
-      Transparency = 13
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 520
+    Width = 738
+    Height = 43
+    Align = alBottom
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 1
+      Top = 1
+      Width = 736
+      Height = 13
+      Align = alTop
+      Caption = 'Rotation'
+      ExplicitLeft = 0
+      ExplicitTop = 6
+      ExplicitWidth = 45
+    end
+    object TrackBarRotation: TTrackBar
+      Left = 1
+      Top = 14
+      Width = 736
+      Height = 28
+      Align = alClient
+      Max = 360
+      TabOrder = 0
+      TickMarks = tmTopLeft
+      OnChange = TrackBarRotationChange
     end
   end
   object MainMenu1: TMainMenu
@@ -86,6 +116,17 @@ object frmExpenseGraph: TfrmExpenseGraph
       object mnuPrintGraph: TMenuItem
         Caption = '&Print'
         OnClick = mnuPrintGraphClick
+      end
+      object mnuGraphRefresh: TMenuItem
+        Caption = '&Refresh'
+        OnClick = mnuGraphRefreshClick
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object mnuFileExit: TMenuItem
+        Caption = 'E&xit'
+        OnClick = mnuFileExitClick
       end
     end
   end

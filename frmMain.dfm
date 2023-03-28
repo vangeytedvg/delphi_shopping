@@ -6384,12 +6384,12 @@ object Form9: TForm9
   object GroupBox2: TGroupBox
     Left = 248
     Top = 145
-    Width = 582
+    Width = 573
     Height = 81
     Caption = 'Expense detail'
     TabOrder = 4
     DesignSize = (
-      582
+      573
       81)
     object lblLocation: TLabel
       Left = 294
@@ -6407,7 +6407,7 @@ object Form9: TForm9
       FocusControl = DBEdit2
     end
     object Label1: TLabel
-      Left = 32
+      Left = 31
       Top = 24
       Width = 88
       Height = 15
@@ -6438,7 +6438,7 @@ object Form9: TForm9
       TabOrder = 1
     end
     object DBEdit1: TDBEdit
-      Left = 34
+      Left = 33
       Top = 45
       Width = 86
       Height = 23
@@ -6489,8 +6489,16 @@ object Form9: TForm9
         OnClick = mnuToolsGraphClick
       end
       object GraphbyDate1: TMenuItem
-        Caption = 'Graph by Date'
+        Caption = 'Global Graph'
         OnClick = GraphbyDate1Click
+      end
+      object mnuStatitisticsAVG: TMenuItem
+        Caption = 'Average by Shop'
+        OnClick = mnuStatitisticsAVGClick
+      end
+      object PeriodsGraph: TMenuItem
+        Caption = 'Periods Graph'
+        OnClick = PeriodsGraphClick
       end
     end
   end

@@ -8,7 +8,9 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   graphView in 'graphView.pas' {frmExpenseGraph},
-  graphByDate in 'graphByDate.pas' {frmGraphByDate};
+  graphByDate in 'graphByDate.pas' {frmGraphByDate},
+  grapAvg in 'grapAvg.pas' {FormAVG},
+  graphPeriods in 'graphPeriods.pas' {FormPeriods};
 
 {$R *.res}
 
@@ -22,5 +24,7 @@ begin
   Application.CreateForm(TFormShopEditor, FormShopEditor);
   Application.CreateForm(TfrmExpenseGraph, frmExpenseGraph);
   Application.CreateForm(TfrmGraphByDate, frmGraphByDate);
+  Application.CreateForm(TFormAVG, FormAVG);
+  Application.CreateForm(TFormPeriods, FormPeriods);
   Application.Run;
 end.

@@ -54,6 +54,8 @@ type
     cbASCDESC: TCheckBox;
     Statistics1: TMenuItem;
     GraphbyDate1: TMenuItem;
+    mnuStatitisticsAVG: TMenuItem;
+    PeriodsGraph: TMenuItem;
     procedure ReferenceData2Click(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -68,6 +70,8 @@ type
     procedure cmbSortByChange(Sender: TObject);
     procedure cbASCDESCClick(Sender: TObject);
     procedure GraphbyDate1Click(Sender: TObject);
+    procedure mnuStatitisticsAVGClick(Sender: TObject);
+    procedure PeriodsGraphClick(Sender: TObject);
   private
     { Private declarations }
     origSql: String;
@@ -82,7 +86,7 @@ var
 implementation
 
 uses
-  frmShopEditor, graphView, graphByDate;
+  frmShopEditor, graphView, graphByDate, grapAvg, graphPeriods;
 
 {$R *.dfm}
 
@@ -91,17 +95,18 @@ var
   sqlString: String;
   lastWordPos: Integer;
 begin
-  // Apply the filter the user specified
-  sqlString := 'SELECT * FROM expenses WHERE';
+  // Apply the filter the user specified, had to adapt the filter because the
+  // EXPDATE field is an integer now
+  sqlString :=
+    'SELECT cast(expenses.EXPDATE  as text) as ed, EXPENSE_ID, AMOUNT , SHOPID , EXPDATE  from expenses WHERE';
   if cmbMonth.itemIndex <> -1 then
   begin
-    sqlString := sqlString + ' substr(dateexpense, 4,2) = ' +
+    sqlString := sqlString + ' SUBSTR(ed, 5, 2) = ' +
       QuotedStr(cmbMonth.Text) + ' AND';
   end;
   if cmbYear.itemIndex <> -1 then
   begin
-    sqlString := sqlString + ' substr(dateexpense, 7,4) ="' + cmbYear.Text
-      + '" AND';
+    sqlString := sqlString + ' substr(ed, 1,4) ="' + cmbYear.Text + '" AND';
   end;
 
   if cmbShopFilter.itemIndex <> -1 then
@@ -260,16 +265,24 @@ begin
         .AsString);
       DataModule1.ShopsTable.Next;
     end;
-
-  finally
-
+  except
+    ShowMessage('An error occured');
   end;
 
 end;
 
 procedure TForm9.GraphbyDate1Click(Sender: TObject);
+// Show Graph by Date
 begin
+  DataModule1.SumbydateView.Active := false;
+  DataModule1.SumbydateView.Active := true;
+  DataModule1.SumbydateView.Refresh;
   frmGraphByDate.Show;
+end;
+
+procedure TForm9.mnuStatitisticsAVGClick(Sender: TObject);
+begin
+  FormAVG.Show;
 end;
 
 procedure TForm9.mnuToolsExportClick(Sender: TObject);
@@ -315,7 +328,8 @@ begin
         if MessageDlg('Would you like to view the file?', mtConfirmation,
           [mbYes, mbNo], 0, mbYes) = mrYes then
         begin
-         ShellExecute(Handle, 'open', PChar(selectedFile), nil,nil,SW_SHOWNORMAL)
+          ShellExecute(Handle, 'open', PChar(selectedFile), nil, nil,
+            SW_SHOWNORMAL)
         end;
       end;
 
@@ -329,7 +343,15 @@ end;
 
 procedure TForm9.mnuToolsGraphClick(Sender: TObject);
 begin
+  DataModule1.SumbyshopView.Active := false;
+  DataModule1.SumbyshopView.Active := true;
+  DataModule1.SumbyshopView.Refresh;
   frmExpenseGraph.Show;
+end;
+
+procedure TForm9.PeriodsGraphClick(Sender: TObject);
+begin
+FormPeriods.Show;
 end;
 
 procedure TForm9.ReferenceData2Click(Sender: TObject);

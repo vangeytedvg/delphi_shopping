@@ -1,0 +1,159 @@
+object DataModule1: TDataModule1
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  Height = 216
+  Width = 640
+  object ShopperConnection: TFDConnection
+    Params.Strings = (
+      'ConnectionDef=Shopper')
+    Connected = True
+    LoginPrompt = False
+    Left = 44
+    Top = 26
+  end
+  object ShopsTable: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'SELECT * FROM shops ORDER BY SHOPID')
+    Left = 146
+    Top = 23
+    object ShopsTableSHOPID: TWideStringField
+      FieldName = 'SHOPID'
+      Origin = 'SHOPID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 4
+    end
+    object ShopsTableSHOPNAME: TWideStringField
+      FieldName = 'SHOPNAME'
+      Origin = 'SHOPNAME'
+      Required = True
+      Size = 50
+    end
+    object ShopsTableLOCATION: TWideStringField
+      FieldName = 'LOCATION'
+      Origin = 'LOCATION'
+      Size = 50
+    end
+  end
+  object DS_Shops: TDataSource
+    DataSet = ShopsTable
+    Left = 144
+    Top = 80
+  end
+  object ExpensesTable: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'select * from expenses')
+    Left = 225
+    Top = 24
+    object ExpensesTableEXPENSE_ID: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'EXPENSE_ID'
+      Origin = 'EXPENSE_ID'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object ExpensesTableAMOUNT: TBCDField
+      DisplayWidth = 20
+      FieldName = 'AMOUNT'
+      Origin = 'AMOUNT'
+      DisplayFormat = '#.00'
+      currency = True
+      Precision = 5
+      Size = 2
+    end
+    object ExpensesTableSHOPID: TWideStringField
+      DisplayWidth = 6
+      FieldName = 'SHOPID'
+      Origin = 'SHOPID'
+      Size = 5
+    end
+    object ExpensesTableEXPDATE: TIntegerField
+      FieldName = 'EXPDATE'
+      Origin = 'EXPDATE'
+      EditFormat = '########'
+    end
+  end
+  object DS_Expense: TDataSource
+    DataSet = ExpensesTable
+    Left = 224
+    Top = 80
+  end
+  object SumbyshopView: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'SELECT sum(AMOUNT), shops.SHOPNAME  '
+      'FROM expenses'
+      'INNER JOIN shops ON shops.SHOPID  = expenses.SHOPID'
+      'group by expenses.SHOPID ')
+    Left = 451
+    Top = 37
+  end
+  object SumbydateView: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'SELECT * FROM sumbydate')
+    Left = 364
+    Top = 36
+  end
+  object SumdatesView: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'SELECT * FROM sumDates')
+    Left = 550
+    Top = 38
+  end
+  object FDQuery1: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      
+        'SELECT cast(expenses.EXPDATE  as text) as ed, EXPENSE_ID, sum(AM' +
+        'OUNT) , SHOPID , EXPDATE  from expenses '
+      'group by EXPDATE  '
+      'ORDER BY ed ASC')
+    Left = 48
+    Top = 152
+  end
+  object AVGByShop: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      'select round(avg(amount),2),'
+      'shops.SHOPNAME  '
+      'FROM expenses'
+      'INNER JOIN shops ON shops.SHOPID  = expenses.SHOPID'
+      'group by expenses.SHOPID '
+      '')
+    Left = 360
+    Top = 88
+  end
+  object PeriodQuery: TFDQuery
+    Active = True
+    Connection = ShopperConnection
+    SQL.Strings = (
+      
+        'select shops.SHOPNAME, sum(amount), SUBSTRING(SUBSTRING(cast(exp' +
+        'date as string), 5,2) || '#39' '#39' || substring(cast(expdate as string' +
+        '), 1, 4), 1,10) as Period '
+      'from expenses INNER JOIN shops ON shops.SHOPID = expenses.SHOPID'
+      
+        'group by SUBSTRING(cast(expdate as string), 5,2), expenses.shopi' +
+        'd '
+      'order by Period')
+    Left = 144
+    Top = 136
+  end
+  object DS_Periods: TDataSource
+    DataSet = PeriodQuery
+    Left = 224
+    Top = 136
+  end
+end
