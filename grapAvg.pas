@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VclTee.TeeGDIPlus, Data.DB,
   VclTee.TeEngine, VclTee.Series, Vcl.ExtCtrls, VclTee.TeeProcs, VclTee.Chart,
-  VclTee.DBChart, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Menus;
+  VclTee.DBChart, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Menus, Vcl.DBCtrls, Vcl.Grids,
+  Vcl.DBGrids;
 
 type
   TFormAVG = class(TForm)
@@ -21,10 +22,12 @@ type
     Graph2: TMenuItem;
     Exit1: TMenuItem;
     Refresh1: TMenuItem;
+    DBGrid1: TDBGrid;
     procedure TrackBarRotationChange(Sender: TObject);
     procedure Graph2Click(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
     procedure Refresh1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,6 +47,12 @@ uses
 procedure TFormAVG.Exit1Click(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TFormAVG.FormCreate(Sender: TObject);
+begin
+  DBGrid1.Columns[0].Width:=80;
+    DBGrid1.Columns[1].Width:=80;
 end;
 
 procedure TFormAVG.Graph2Click(Sender: TObject);

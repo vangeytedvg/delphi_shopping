@@ -1,23 +1,34 @@
 object FormAVG: TFormAVG
   Left = 0
   Top = 0
-  Caption = 'FormAVG'
-  ClientHeight = 467
-  ClientWidth = 720
+  Caption = 'Expenses by Shop (AVERAGE)'
+  ClientHeight = 593
+  ClientWidth = 796
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 0
+    Top = 120
+    Width = 796
+    Height = 3
+    Cursor = crVSplit
+    Align = alTop
+    ExplicitWidth = 410
+  end
   object chrtExpense: TDBChart
     Left = 0
-    Top = 0
-    Width = 720
-    Height = 467
+    Top = 123
+    Width = 796
+    Height = 407
     Foot.Color = 9917212
     Foot.Font.Color = clBlack
     Foot.Font.Height = -9
@@ -31,7 +42,7 @@ object FormAVG: TFormAVG
     Chart3DPercent = 1
     LeftAxis.Ticks.Width = 0
     Panning.InsideBounds = True
-    View3DOptions.Elevation = 320
+    View3DOptions.Elevation = 315
     View3DOptions.HorizOffset = -14
     View3DOptions.Orthogonal = False
     View3DOptions.Perspective = 0
@@ -39,7 +50,10 @@ object FormAVG: TFormAVG
     Zoom.Animated = True
     Align = alClient
     TabOrder = 0
-    ExplicitHeight = 450
+    ExplicitLeft = 8
+    ExplicitTop = 134
+    ExplicitWidth = 720
+    ExplicitHeight = 404
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -80,72 +94,71 @@ object FormAVG: TFormAVG
       OtherSlice.Legend.Visible = False
     end
   end
-  object DBChart1: TDBChart
+  object Panel1: TPanel
+    Left = 0
+    Top = 530
+    Width = 796
+    Height = 63
+    Align = alBottom
+    TabOrder = 1
+    ExplicitLeft = 32
+    ExplicitTop = 480
+    ExplicitWidth = 720
+    object Label1: TLabel
+      Left = 1
+      Top = 1
+      Width = 794
+      Height = 13
+      Align = alTop
+      Caption = 'Rotation'
+      ExplicitTop = 41
+      ExplicitWidth = 718
+    end
+    object TrackBarRotation: TTrackBar
+      Left = 1
+      Top = 14
+      Width = 794
+      Height = 48
+      Align = alClient
+      Max = 360
+      TabOrder = 0
+      TickMarks = tmTopLeft
+      OnChange = TrackBarRotationChange
+      ExplicitWidth = 718
+      ExplicitHeight = 35
+    end
+  end
+  object DBGrid1: TDBGrid
     Left = 0
     Top = 0
-    Width = 720
-    Height = 467
-    Foot.Color = 9917212
-    Foot.Font.Color = clBlack
-    Foot.Font.Height = -9
-    Foot.Text.Strings = (
-      'by DenkaTech')
-    ScrollMouseButton = mbMiddle
-    Title.Font.Height = -21
-    Title.Text.Strings = (
-      'Expenses by Shop')
-    Chart3DPercent = 11
-    ClipPoints = False
-    Panning.InsideBounds = True
-    View3DOptions.Elevation = 315
-    View3DOptions.Orthogonal = False
-    View3DOptions.Perspective = 0
-    View3DOptions.Rotation = 360
-    Align = alClient
-    TabOrder = 1
-    ExplicitLeft = -18
-    ExplicitTop = -70
-    ExplicitWidth = 738
-    ExplicitHeight = 520
-    DefaultCanvas = 'TGDIPlusCanvas'
-    PrintMargins = (
-      15
-      16
-      15
-      16)
-    ColorPaletteIndex = 15
-    object PieSeries1: TPieSeries
-      DataSource = DataModule1.SumbyshopView
-      SeriesColor = 16776176
-      XLabelsSource = 'SHOPNAME'
-      XValues.Order = loAscending
-      YValues.Name = 'Pie'
-      YValues.Order = loNone
-      YValues.ValueSource = 'sum(AMOUNT)'
-      Frame.InnerBrush.BackColor = clRed
-      Frame.InnerBrush.Gradient.EndColor = clGray
-      Frame.InnerBrush.Gradient.MidColor = clWhite
-      Frame.InnerBrush.Gradient.StartColor = 4210752
-      Frame.InnerBrush.Gradient.Visible = True
-      Frame.MiddleBrush.BackColor = clYellow
-      Frame.MiddleBrush.Gradient.EndColor = 8553090
-      Frame.MiddleBrush.Gradient.MidColor = clWhite
-      Frame.MiddleBrush.Gradient.StartColor = clGray
-      Frame.MiddleBrush.Gradient.Visible = True
-      Frame.OuterBrush.BackColor = clGreen
-      Frame.OuterBrush.Gradient.EndColor = 4210752
-      Frame.OuterBrush.Gradient.MidColor = clWhite
-      Frame.OuterBrush.Gradient.StartColor = clSilver
-      Frame.OuterBrush.Gradient.Visible = True
-      Frame.Width = 4
-      Bevel.Bright = 58
-      Bevel.Percent = 35
-      BevelPercent = 35
-      Dark3D = False
-      DarkPen = 220
-      EdgeStyle = edCurved
-      ExplodeBiggest = 25
-      OtherSlice.Legend.Visible = False
+    Width = 796
+    Height = 120
+    Align = alTop
+    DataSource = DataModule1.DataSourceSpan
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object MainMenu1: TMainMenu
+    Left = 184
+    Top = 120
+    object Graph1: TMenuItem
+      Caption = '&Graph'
+      object Refresh1: TMenuItem
+        Caption = '&Refresh'
+        OnClick = Refresh1Click
+      end
+      object Graph2: TMenuItem
+        Caption = '&Print'
+        OnClick = Graph2Click
+      end
+      object Exit1: TMenuItem
+        Caption = 'E&xit'
+        OnClick = Exit1Click
+      end
     end
   end
 end

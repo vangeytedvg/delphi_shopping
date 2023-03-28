@@ -1,8 +1,8 @@
 object FormAVG: TFormAVG
   Left = 0
   Top = 0
-  Caption = 'FormAVG'
-  ClientHeight = 467
+  Caption = 'Expenses by Shop (AVERAGE)'
+  ClientHeight = 447
   ClientWidth = 720
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -10,6 +10,7 @@ object FormAVG: TFormAVG
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
@@ -17,7 +18,7 @@ object FormAVG: TFormAVG
     Left = 0
     Top = 0
     Width = 720
-    Height = 424
+    Height = 404
     Foot.Color = 9917212
     Foot.Font.Color = clBlack
     Foot.Font.Height = -9
@@ -31,7 +32,7 @@ object FormAVG: TFormAVG
     Chart3DPercent = 1
     LeftAxis.Ticks.Width = 0
     Panning.InsideBounds = True
-    View3DOptions.Elevation = 320
+    View3DOptions.Elevation = 315
     View3DOptions.HorizOffset = -14
     View3DOptions.Orthogonal = False
     View3DOptions.Perspective = 0
@@ -39,7 +40,6 @@ object FormAVG: TFormAVG
     Zoom.Animated = True
     Align = alClient
     TabOrder = 0
-    ExplicitHeight = 369
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -82,13 +82,11 @@ object FormAVG: TFormAVG
   end
   object Panel1: TPanel
     Left = 0
-    Top = 424
+    Top = 404
     Width = 720
     Height = 43
     Align = alBottom
     TabOrder = 1
-    ExplicitLeft = -18
-    ExplicitWidth = 738
     object Label1: TLabel
       Left = 1
       Top = 1
@@ -108,7 +106,25 @@ object FormAVG: TFormAVG
       TabOrder = 0
       TickMarks = tmTopLeft
       OnChange = TrackBarRotationChange
-      ExplicitWidth = 736
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 48
+    Top = 32
+    object Graph1: TMenuItem
+      Caption = '&Graph'
+      object Refresh1: TMenuItem
+        Caption = '&Refresh'
+        OnClick = Refresh1Click
+      end
+      object Graph2: TMenuItem
+        Caption = '&Print'
+        OnClick = Graph2Click
+      end
+      object Exit1: TMenuItem
+        Caption = 'E&xit'
+        OnClick = Exit1Click
+      end
     end
   end
 end

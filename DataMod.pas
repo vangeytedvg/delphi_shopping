@@ -31,6 +31,8 @@ type
     AVGByShop: TFDQuery;
     PeriodQuery: TFDQuery;
     DS_Periods: TDataSource;
+    PeriodSpanQuery: TFDQuery;
+    DataSourceSpan: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -56,6 +58,7 @@ begin
   SumbydateView.Active := true;
   PeriodQuery.Active := true;
   AVGByShop.Active := true;
+  PeriodSpanQuery.Active := true;
 end;
 
 procedure TDataModule1.DataModuleDestroy(Sender: TObject);
@@ -67,6 +70,7 @@ begin
   SumbydateView.Active := false;
   PeriodQuery.Active := false;
   AVGByShop.Active := false;
+  PeriodSpanQuery.Active := false;
 end;
 
 end.

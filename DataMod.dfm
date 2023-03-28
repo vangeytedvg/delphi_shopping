@@ -155,4 +155,20 @@ object DataModule1: TDataModule1
     Left = 224
     Top = 144
   end
+  object PeriodSpanQuery: TFDQuery
+    Connection = ShopperConnection
+    SQL.Strings = (
+      
+        'select TRIM(SUBSTRING(cast(expdate as string), 5,2)) as month, T' +
+        'RIM(substring(cast(expdate as string), 1, 4)) as year from expen' +
+        'ses group by TRIM(SUBSTRING(cast(expdate as string), 5,2))'
+      'order by month DESC')
+    Left = 312
+    Top = 144
+  end
+  object DataSourceSpan: TDataSource
+    DataSet = PeriodSpanQuery
+    Left = 408
+    Top = 144
+  end
 end

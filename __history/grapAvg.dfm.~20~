@@ -1,9 +1,9 @@
 object FormAVG: TFormAVG
   Left = 0
   Top = 0
-  Caption = 'FormAVG'
-  ClientHeight = 447
-  ClientWidth = 720
+  Caption = 'Expenses by Shop (AVERAGE)'
+  ClientHeight = 551
+  ClientWidth = 803
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object FormAVG: TFormAVG
   PixelsPerInch = 96
   TextHeight = 13
   object chrtExpense: TDBChart
-    Left = 0
-    Top = 0
+    Left = 88
+    Top = 8
     Width = 720
     Height = 404
     Foot.Color = 9917212
@@ -38,9 +38,7 @@ object FormAVG: TFormAVG
     View3DOptions.Perspective = 0
     View3DOptions.Rotation = 360
     Zoom.Animated = True
-    Align = alClient
     TabOrder = 0
-    ExplicitHeight = 424
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -82,13 +80,11 @@ object FormAVG: TFormAVG
     end
   end
   object Panel1: TPanel
-    Left = 0
-    Top = 404
+    Left = 88
+    Top = 418
     Width = 720
     Height = 43
-    Align = alBottom
     TabOrder = 1
-    ExplicitTop = 424
     object Label1: TLabel
       Left = 1
       Top = 1
@@ -96,7 +92,7 @@ object FormAVG: TFormAVG
       Height = 13
       Align = alTop
       Caption = 'Rotation'
-      ExplicitWidth = 41
+      ExplicitTop = 41
     end
     object TrackBarRotation: TTrackBar
       Left = 1
@@ -108,21 +104,36 @@ object FormAVG: TFormAVG
       TabOrder = 0
       TickMarks = tmTopLeft
       OnChange = TrackBarRotationChange
+      ExplicitLeft = 24
+      ExplicitTop = 6
     end
   end
-  object MainMenu1: TMainMenu
-    Left = 48
+  object DBListBox1: TDBListBox
+    Left = 16
     Top = 32
+    Width = 289
+    Height = 297
+    DataField = 'TRIM(substring(cast(expdate as string), 1, 4))'
+    DataSource = DataModule1.DataSourceSpan
+    ItemHeight = 13
+    TabOrder = 2
+  end
+  object MainMenu1: TMainMenu
+    Left = 184
+    Top = 120
     object Graph1: TMenuItem
       Caption = '&Graph'
+      object Refresh1: TMenuItem
+        Caption = '&Refresh'
+        OnClick = Refresh1Click
+      end
       object Graph2: TMenuItem
         Caption = '&Print'
-      end
-      object N1: TMenuItem
-        Caption = '-'
+        OnClick = Graph2Click
       end
       object Exit1: TMenuItem
         Caption = 'E&xit'
+        OnClick = Exit1Click
       end
     end
   end

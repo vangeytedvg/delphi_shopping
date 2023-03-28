@@ -1,0 +1,108 @@
+unit graphPeriods;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VclTee.TeeGDIPlus, Data.DB,
+  VclTee.TeEngine, VclTee.Series, Vcl.ExtCtrls, VclTee.TeeProcs, VclTee.Chart,
+  VclTee.DBChart, Vcl.Grids, Vcl.DBGrids, Vcl.Menus, Printers, ShellAPI;
+
+type
+  TFormPeriods = class(TForm)
+    DBGrid1: TDBGrid;
+    MainMenu1: TMainMenu;
+    Graph1: TMenuItem;
+    Graph2: TMenuItem;
+    Exit1: TMenuItem;
+    Print1: TMenuItem;
+    PrintDialog: TPrintDialog;
+    procedure Graph2Click(Sender: TObject);
+    procedure Exit1Click(Sender: TObject);
+    procedure Print1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormPeriods: TFormPeriods;
+
+implementation
+
+uses
+  DataMod;
+
+{$R *.dfm}
+
+procedure TFormPeriods.Exit1Click(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TFormPeriods.Graph2Click(Sender: TObject);
+begin
+  DataModule1.PeriodQuery.Active := False;
+  DataModule1.PeriodQuery.Active := True;
+end;
+
+procedure TFormPeriods.Print1Click(Sender: TObject);
+// Print the contents of the grid (A4)
+var
+  i, j, x, y: Integer;
+  Text: string;
+  sReportHeader: string;
+begin
+  if PrintDialog.Execute then
+  begin
+    with Printer do
+    begin
+      Printer.BeginDoc;
+      Canvas.Font.Size := 15;
+      Canvas.Font.Color := clRed;
+      Canvas.Font.Style := [fsBold];
+
+      sReportHeader := 'Employee Details';
+      Canvas.TextOut((Printer.PageWidth - Canvas.TextWidth(sReportHeader))
+        div 2, 100, sReportHeader);
+
+      x := 400; // Starting position of the grid on the page
+      y := 2000;
+
+      Canvas.Font.Size := 10;
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Style := [];
+
+      for i := 0 to DBGrid1.Columns.Count - 1 do
+      begin
+        Printer.Canvas.TextOut(x, y, DBGrid1.Columns[i].Title.Caption);
+        x := x + DBGrid1.Columns[i].Width + 400; // Add spacing between columns
+      end;
+      y := y + 200; // Move down for the data rows
+      with DBGrid1.DataSource.DataSet do
+      begin
+        First;
+        while not Eof do
+        begin
+          x := 100;
+          for j := 0 to FieldCount - 1 do
+          begin
+            Text := Fields[j].AsString;
+            Printer.Canvas.TextOut(x, y, Text);
+            x := x + DBGrid1.Columns[j].Width + 10;
+            // Add spacing between columns
+          end;
+          y := y + 20; // Move down to the next row
+          Next;
+        end;
+      end;
+      Printer.EndDoc;
+      ShellExecute(Handle, 'open', 'c:\temp\zozo.pdf', nil, nil, SW_SHOWNORMAL);
+    end;
+
+  end;
+end;
+
+end.

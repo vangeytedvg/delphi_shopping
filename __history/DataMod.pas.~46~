@@ -22,15 +22,17 @@ type
     DS_Expense: TDataSource;
     ExpensesTableEXPENSE_ID: TFDAutoIncField;
     ExpensesTableAMOUNT: TBCDField;
-    ExpensesTableDATEEXPENSE: TWideStringField;
     ExpensesTableSHOPID: TWideStringField;
-    ExpenseGRAPH: TFDQuery;
-    FDAutoIncField1: TFDAutoIncField;
-    BCDField1: TBCDField;
-    WideStringField1: TWideStringField;
-    WideStringField2: TWideStringField;
-    DS_Expense_GRAPH: TDataSource;
+    SumbyshopView: TFDQuery;
+    SumbydateView: TFDQuery;
+    ExpensesTableEXPDATE: TIntegerField;
+    SumdatesView: TFDQuery;
+    FDQuery1: TFDQuery;
+    AVGByShop: TFDQuery;
+    PeriodQuery: TFDQuery;
+    DS_Periods: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,6 +52,21 @@ begin
   ShopperConnection.Connected := true;
   ShopsTable.Active := true;
   ExpensesTable.Active := true;
+  SumbyshopView.Active := true;
+  SumbydateView.Active := true;
+  PeriodQuery.Active := true;
+  AVGByShop.Active := true;
+end;
+
+procedure TDataModule1.DataModuleDestroy(Sender: TObject);
+begin
+  ShopperConnection.Connected := false;
+  ShopsTable.Active := false;
+  ExpensesTable.Active := false;
+  SumbyshopView.Active := false;
+  SumbydateView.Active := false;
+  PeriodQuery.Active := false;
+  AVGByShop.Active := false;
 end;
 
 end.

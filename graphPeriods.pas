@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, VclTee.TeeGDIPlus, Data.DB,
   VclTee.TeEngine, VclTee.Series, Vcl.ExtCtrls, VclTee.TeeProcs, VclTee.Chart,
-  VclTee.DBChart, Vcl.Grids, Vcl.DBGrids, Vcl.Menus, Printers;
+  VclTee.DBChart, Vcl.Grids, Vcl.DBGrids, Vcl.Menus, Printers, ShellAPI;
 
 type
   TFormPeriods = class(TForm)
@@ -51,17 +51,58 @@ end;
 procedure TFormPeriods.Print1Click(Sender: TObject);
 // Print the contents of the grid (A4)
 var
-  sText: string;
+  i, j, x, y: Integer;
+  Text: string;
   sReportHeader: string;
-  image1: TBitmap;
-  i: Integer;
-  iTop: Integer;
 begin
   if PrintDialog.Execute then
   begin
+    with Printer do
+    begin
+      Printer.BeginDoc;
+      Canvas.Font.Size := 15;
+      Canvas.Font.Color := clBlue;
+      Canvas.Font.Style := [fsBold];
+
+      sReportHeader := 'Expense Periodic Overview';
+      Canvas.TextOut((Printer.PageWidth - Canvas.TextWidth(sReportHeader))
+        div 2, 100, sReportHeader);
+
+      x := 400; // Starting position of the grid on the page
+      y := 800;
+
+      Canvas.Font.Size := 8;
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Style := [];
+
+      for i := 0 to DBGrid1.Columns.Count - 1 do
+      begin
+        Printer.Canvas.TextOut(x, y, DBGrid1.Columns[i].Title.Caption);
+        x := x + DBGrid1.Columns[i].Width + 800; // Add spacing between columns
+      end;
+      y := y + 150; // Move down for the data rows
+      with DBGrid1.DataSource.DataSet do
+      begin
+        First;
+        while not Eof do
+        begin
+          x := 400;
+          for j := 0 to FieldCount - 1 do
+          begin
+            Text := Fields[j].AsString;
+            Printer.Canvas.TextOut(x, y, Text);
+            x := x + DBGrid1.Columns[j].Width + 800;
+            // Add spacing between columns
+          end;
+          y := y + 150; // Move down to the next row
+          Next;
+        end;
+      end;
+      Printer.EndDoc;
+      ShellExecute(Handle, 'open', 'c:\temp\zozo.pdf', nil, nil, SW_SHOWNORMAL);
+    end;
 
   end;
-
 end;
 
 end.

@@ -2,8 +2,8 @@ object FormAVG: TFormAVG
   Left = 0
   Top = 0
   Caption = 'Expenses by Shop (AVERAGE)'
-  ClientHeight = 447
-  ClientWidth = 720
+  ClientHeight = 593
+  ClientWidth = 796
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,13 +12,14 @@ object FormAVG: TFormAVG
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object chrtExpense: TDBChart
     Left = 0
-    Top = 0
-    Width = 720
-    Height = 404
+    Top = 120
+    Width = 796
+    Height = 410
     Foot.Color = 9917212
     Foot.Font.Color = clBlack
     Foot.Font.Height = -9
@@ -40,6 +41,10 @@ object FormAVG: TFormAVG
     Zoom.Animated = True
     Align = alClient
     TabOrder = 0
+    ExplicitLeft = 8
+    ExplicitTop = 134
+    ExplicitWidth = 720
+    ExplicitHeight = 404
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -82,35 +87,59 @@ object FormAVG: TFormAVG
   end
   object Panel1: TPanel
     Left = 0
-    Top = 404
-    Width = 720
-    Height = 43
+    Top = 530
+    Width = 796
+    Height = 63
     Align = alBottom
     TabOrder = 1
+    ExplicitLeft = 32
+    ExplicitTop = 480
+    ExplicitWidth = 720
     object Label1: TLabel
       Left = 1
       Top = 1
-      Width = 718
+      Width = 794
       Height = 13
       Align = alTop
       Caption = 'Rotation'
-      ExplicitWidth = 41
+      ExplicitTop = 41
+      ExplicitWidth = 718
     end
     object TrackBarRotation: TTrackBar
       Left = 1
       Top = 14
-      Width = 718
-      Height = 28
+      Width = 794
+      Height = 48
       Align = alClient
       Max = 360
       TabOrder = 0
       TickMarks = tmTopLeft
       OnChange = TrackBarRotationChange
+      ExplicitWidth = 718
+      ExplicitHeight = 35
     end
   end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 0
+    Width = 796
+    Height = 120
+    Hint = 'Periods by month/year'
+    Align = alTop
+    DataSource = DataModule1.DataSourceSpan
+    ParentShowHint = False
+    ReadOnly = True
+    ShowHint = True
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
   object MainMenu1: TMainMenu
-    Left = 48
-    Top = 32
+    Left = 184
+    Top = 120
     object Graph1: TMenuItem
       Caption = '&Graph'
       object Refresh1: TMenuItem
